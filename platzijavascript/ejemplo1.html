@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Este es un proyecto divertido</title>
+    <script type="text/javascript">
+
+async function traerPais()//creo una funcion asincrona traerPais el cual espera la variable respuesta
+//traerme la API de abajo y detecta si hay error 404 con el if sino escribe el mensaje
+{
+    const respuesta = await fetch("https://api.nationalize.io/?name=Pepe");
+
+    if (!respuesta.OK)
+    {
+        let oops = ("404 no encontre nada");
+        alert(oops);
+        throw new Error(oops);
+    }
+
+    const nombre = respuesta.json();
+
+    return nombre;
+}
+
+
+function mostrarNombre(n)
+{
+    document.getElementById("mensaje").innerHTML = n.country[0].country_id;
+}
+
+traerPais().then(mostrarNombre);
+
+    </script>
+  </head>
+  <body>
+    <h1>Titulo de mi proyeecto divertido</h1>
+    <p>Este es un proyecto muy divertido</p>
+    <p id="mensaje">Cargando...</p>
+
+    <script type="text/javascript">
+        mostrarNombre("Pancracio");
+    </script>
+
+  </body>
+</html>
